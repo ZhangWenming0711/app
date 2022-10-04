@@ -5,10 +5,15 @@ Vue.use(Vuex);
 
 import home from './home.js';
 import search from './search.js';
+import detail from "./detail.js";
+import shopcart from "./shopcart";
+
 
 export default new Vuex.Store({
     modules:{
         home,
         search,
+        detail,
+        shopcart,
     }
 })

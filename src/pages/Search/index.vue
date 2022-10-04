@@ -71,9 +71,9 @@
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
+                    <router-link :to="`/detail/${good.id}`" target="_blank"
                       ><img :src="good.defaultImg"
-                    /></a>
+                    /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -108,7 +108,13 @@
             </ul>
           </div>
           <!-- 分页 -->
-          <pagination></pagination>
+          <pagination
+            :pageNo="searchParams.pageNo"
+            :pageSize="searchParams.pageSize"
+            :total="total"
+            :continues="5"
+            @getPageNo="getPageNo"
+          ></pagination>
         </div>
       </div>
     </div>
@@ -117,7 +123,7 @@
 
 <script>
 import SearchSelector from "./SearchSelector/SearchSelector";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "Search",
   data() {
@@ -147,6 +153,7 @@ export default {
   },
   computed: {
     ...mapGetters(["goodsList"]),
+    ...mapState({ total: (state) => state.search.searchList.total }),
     isOne() {
       return this.searchParams.order.indexOf("1") != -1;
     },
@@ -211,6 +218,10 @@ export default {
         newOrder = `${flag}:${"desc"}`;
       }
       this.searchParams.order = newOrder;
+      this.getData();
+    },
+    getPageNo(pageNo) {
+      this.searchParams.pageNo = pageNo;
       this.getData();
     },
   },
