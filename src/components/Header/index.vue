@@ -5,10 +5,14 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!userName">
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
+          </p>
+          <p v-else>
+            <a>{{userName}}</a>
+            <a class="register" @click="logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
@@ -32,17 +36,8 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input
-            type="text"
-            id="autocomplete"
-            class="input-error input-xxlarge"
-            v-model="keyword"
-          />
-          <button
-            class="sui-btn btn-xlarge btn-danger"
-            type="button"
-            @click="goSearch"
-          >
+          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
+          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
             搜索
           </button>
         </form>
@@ -52,6 +47,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Header",
   data() {
@@ -70,18 +66,31 @@ export default {
         this.$router.push(location);
       }
     },
+    async logout(){
+      try {
+        await this.$store.dispatch("userLogout");
+        this.$router.push("/home");
+      }catch(error){
+        alert(error.message);
+      };
+    },
   },
   mounted() {
     this.$bus.$on("clear", () => {
       this.keyword = "";
     });
   },
+  computed: {
+    userName() {
+      return this.$store.state.user.userInfo.name;
+    }
+  },
 };
 </script>
 
 <style scoped lang="less">
 .header {
-  & > .top {
+  &>.top {
     background-color: #eaeaea;
     height: 30px;
     line-height: 30px;
@@ -112,7 +121,7 @@ export default {
         a {
           padding: 0 10px;
 
-          & + a {
+          &+a {
             border-left: 1px solid #b3aeae;
           }
         }
@@ -120,7 +129,7 @@ export default {
     }
   }
 
-  & > .bottom {
+  &>.bottom {
     width: 1200px;
     margin: 0 auto;
     overflow: hidden;

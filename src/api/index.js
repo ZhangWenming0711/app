@@ -18,3 +18,18 @@ export const reqDeleteCartById = (skuId) =>
   requests({ url: `/cart/deleteCart/${skuId}`, method: "delete" });
 export const reqUpdateCheckedById = (skuId, isChecked) =>
   requests({ url: `/cart/checkCart/${skuId}/${isChecked}`, method: "get" });
+export const reqGetCode = (phone) =>
+  requests({ url: `/user/passport/sendCode/${phone}`, method: "get" });
+export const reqUserRegister = (data) =>
+  requests({
+    url: `/user/passport/register`,
+    data,
+    method: "post",
+  });
+export const reqUserLogin = (data) =>
+  requests({ url: `/user/passport/login`, method: "post", data });
+// 获取用户信息并验证【token】
+export const reqUserInfo = () =>
+  requests({ url: `/user/passport/auth/getUserInfo`, method: "get" });
+export const reqLogout = () =>
+  requests({ url: `/user/passport/logout`, method: "get" });

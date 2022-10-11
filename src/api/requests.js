@@ -24,19 +24,15 @@ requests.interceptors.request.use((config) => {
     config.headers.userTempId = store.state.detail.uuid_token;
   }
   nprogress.start();
-  //   if (store.state.shopcart.USER_ID) {
-  //     config.headers.userTempId = store.state.shopcart.USER_ID;
-  //   }
+
 
   // //   //token[公共参数]
 
-  //   if (store.state.user.token) {
-  //     config.headers.token = store.state.user.token;
-  //   }
+    if (store.state.user.token) {
+      config.headers.token = store.state.user.token;
+    }
 
-  //每一次发请求,请求头携带用户临时身份
-  // config.headers.userTempId = SET_USERID();
-  //不管那个模块发请求,请求拦截器，都可以触发。请求拦截器可以通过请求头每一次协大公共参数给服务器【用户未登录的临时身份】
+
   return config;
 });
 
