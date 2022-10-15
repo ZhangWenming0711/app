@@ -26,11 +26,7 @@
               }}<i @click="removeTrademark">x</i>
             </li>
             <!-- attr面包屑 -->
-            <li
-              class="with-x"
-              v-for="(attrValue, index) in searchParams.props"
-              :key="index"
-            >
+            <li class="with-x" v-for="(attrValue, index) in searchParams.props" :key="index">
               {{ attrValue.split(":")[1] }}<i @click="removeAttr(index)">x</i>
             </li>
           </ul>
@@ -45,22 +41,12 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <li :class="{ active: isOne }" @click="changeOrder(1)">
-                  <a href="#"
-                    >综合<span
-                      v-show="isOne"
-                      class="iconfont"
-                      :class="{ 'icon-up': isAsc, 'icon-down': isDesc }"
-                    ></span
-                  ></a>
+                  <a href="#">综合<span v-show="isOne" class="iconfont"
+                      :class="{ 'icon-up': isAsc, 'icon-down': isDesc }"></span></a>
                 </li>
                 <li :class="{ active: isTwo }" @click="changeOrder(2)">
-                  <a href="#"
-                    >价格<span
-                      v-show="isTwo"
-                      class="iconfont"
-                      :class="{ 'icon-up': isAsc, 'icon-down': isDesc }"
-                    ></span
-                  ></a>
+                  <a href="#">价格<span v-show="isTwo" class="iconfont"
+                      :class="{ 'icon-up': isAsc, 'icon-down': isDesc }"></span></a>
                 </li>
               </ul>
             </div>
@@ -71,9 +57,7 @@
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <router-link :to="`/detail/${good.id}`" target="_blank"
-                      ><img :src="good.defaultImg"
-                    /></router-link>
+                    <router-link :to="`/detail/${good.id}`"><img :src="good.defaultImg" /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -82,39 +66,23 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a
-                      target="_blank"
-                      href="item.html"
-                      title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
-                      >{{ good.title }}</a
-                    >
+                    <a target="_blank" href="item.html" title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">{{ good.title
+                    }}</a>
                   </div>
                   <div class="commit">
                     <i class="command">已有<span>2000</span>人评价</i>
                   </div>
                   <div class="operate">
-                    <a
-                      href="success-cart.html"
-                      target="_blank"
-                      class="sui-btn btn-bordered btn-danger"
-                      >加入购物车</a
-                    >
-                    <a href="javascript:void(0);" class="sui-btn btn-bordered"
-                      >收藏</a
-                    >
+                    <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                    <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
           <!-- 分页 -->
-          <pagination
-            :pageNo="searchParams.pageNo"
-            :pageSize="searchParams.pageSize"
-            :total="total"
-            :continues="5"
-            @getPageNo="getPageNo"
-          ></pagination>
+          <pagination :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5"
+            @getPageNo="getPageNo"></pagination>
         </div>
       </div>
     </div>

@@ -31,7 +31,15 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getFloorList");
-    // this.$store.dispatch('getUserInfo');
+    this.getUserInfo();
+  },
+  methods:{
+    async getUserInfo(){
+      try{
+        await this.$store.dispatch('getUserInfo');
+      }catch(error){
+      }
+    }
   },
   computed: {
     ...mapState({

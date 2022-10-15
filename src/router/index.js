@@ -54,11 +54,10 @@ router.beforeEach(async (to, from, next) => {
   let token = store.state.user.token;
   let name = store.state.user.userInfo.name;
   if (token) {
-    if (to.path == "/login"||to.path=="/register") {
+    if (to.path == "/login" || to.path == "/register") {
       next("/");
     } else {
       if (name) {
-        console.log(name);
         next();
       } else {
         try {
